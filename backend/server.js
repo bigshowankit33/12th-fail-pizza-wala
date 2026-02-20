@@ -5,12 +5,17 @@ const cors = require("cors");
 
 // Routes Import
 const productRoutes = require("./routes/productRoutes");
-const orderRoutes = require("./routes/orderRoutes"); // Isko activate kar diya hai
+const orderRoutes = require("./routes/orderRoutes");
+const adminRoutes = require("./routes/adminRoutes"); // Admin login ke liye zaroori hai
 
 const app = express();
 
-// Middlewares
-app.use(cors());
+// 1. CORS Middleware - Isse connection error theek ho jayega
+app.use(cors({
+  origin: "*", // Testing ke liye sab allow kiya hai, baad mein Vercel link dalo
+  credentials: true
+}));
+
 app.use(express.json());
 
 // MongoDB Connection
@@ -33,9 +38,10 @@ app.get("/api/test", (req, res) => {
 
 // 2. Main API Routes
 app.use("/api/products", productRoutes);
-app.use("/api/orders", orderRoutes); // Order system enabled
+app.use("/api/orders", orderRoutes);
+app.use("/api/admin", adminRoutes); // Admin dashboard connection
 
-// 3. 404 Route Handler (Jab koi galat URL hit kare)
+// 3. 404 Route Handler
 app.use((req, res) => {
   res.status(404).json({ message: "Route nahi mila! Path check karo." });
 });
