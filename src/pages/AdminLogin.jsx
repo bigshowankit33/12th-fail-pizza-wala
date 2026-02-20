@@ -10,6 +10,9 @@ const AdminLogin = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Sabse zaroori update: Production URL handle karne ke liye
+  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
   const from = location.state?.from?.pathname || '/admin';
 
   const handleSubmit = async (e) => {
@@ -18,7 +21,8 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/admin/login', {
+      // Localhost ko badal kar dynamic variable lagaya
+      const response = await fetch(`${API_BASE_URL}/api/admin/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -45,18 +49,16 @@ const AdminLogin = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="max-w-md w-full">
-        {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-red rounded-full mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-red-600 rounded-full mb-4">
             <ChefHat className="text-white" size={32} />
           </div>
-          <h1 className="text-2xl font-heading font-bold text-gray-900">
+          <h1 className="text-2xl font-bold text-gray-900">
             12th Fail Pizza Wala
           </h1>
           <p className="text-gray-500 mt-1">Admin Dashboard Login</p>
         </div>
 
-        {/* Login Form */}
         <div className="bg-white rounded-2xl shadow-lg p-8">
           <form onSubmit={handleSubmit}>
             <div className="mb-6">
@@ -72,7 +74,7 @@ const AdminLogin = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter admin password"
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-red focus:border-transparent"
+                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
                   required
                 />
                 <button
@@ -89,7 +91,6 @@ const AdminLogin = () => {
               </div>
             </div>
 
-            {/* Error Message */}
             {error && (
               <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2">
                 <AlertCircle className="text-red-500 flex-shrink-0" size={18} />
@@ -97,22 +98,20 @@ const AdminLogin = () => {
               </div>
             )}
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading || !password}
-              className="w-full bg-primary-red text-white py-3 rounded-lg font-medium hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-red-600 text-white py-3 rounded-lg font-medium hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Verifying...' : 'Login to Admin'}
             </button>
           </form>
         </div>
 
-        {/* Back to Home */}
         <div className="text-center mt-6">
           <a
             href="/"
-            className="text-sm text-gray-500 hover:text-primary-red transition-colors"
+            className="text-sm text-gray-500 hover:text-red-600 transition-colors"
           >
             ← Back to Home
           </a>
