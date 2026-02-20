@@ -1,0 +1,13 @@
+# Secrets
+.env
+
+# Dependencies
+node_modules/
+
+# Production Build
+dist/
+build/
+
+# IDE & OS files
+.vscode/
+.DS_Store
