@@ -10,7 +10,7 @@ const AdminLogin = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Sabse zaroori update: Production URL handle karne ke liye
+  // Sabse zaroori fix: Ye variable Vercel settings se URL uthayega
   const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
   const from = location.state?.from?.pathname || '/admin';
@@ -21,7 +21,7 @@ const AdminLogin = () => {
     setLoading(true);
 
     try {
-      // Localhost ko badal kar dynamic variable lagaya
+      // Yahan humne dynamic URL use kiya hai
       const response = await fetch(`${API_BASE_URL}/api/admin/login`, {
         method: 'POST',
         headers: {
@@ -37,10 +37,13 @@ const AdminLogin = () => {
         localStorage.setItem('isAdmin', 'true');
         navigate(from, { replace: true });
       } else {
+        // Agar password galat hai toh backend ka message dikhayega
         setError(data.message || 'Invalid admin password. Please try again.');
       }
     } catch (err) {
-      setError('Connection error. Please try again.');
+      // Agar connection nahi ho paya toh ye error aayega
+      setError('Connection error. Please check if backend is live.');
+      console.error('Login Error:', err);
     } finally {
       setLoading(false);
     }
@@ -49,6 +52,7 @@ const AdminLogin = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="max-w-md w-full">
+        {/* Logo Section */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-red-600 rounded-full mb-4">
             <ChefHat className="text-white" size={32} />
@@ -59,6 +63,7 @@ const AdminLogin = () => {
           <p className="text-gray-500 mt-1">Admin Dashboard Login</p>
         </div>
 
+        {/* Login Form */}
         <div className="bg-white rounded-2xl shadow-lg p-8">
           <form onSubmit={handleSubmit}>
             <div className="mb-6">
@@ -91,6 +96,7 @@ const AdminLogin = () => {
               </div>
             </div>
 
+            {/* Error Message Display */}
             {error && (
               <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2">
                 <AlertCircle className="text-red-500 flex-shrink-0" size={18} />
@@ -98,6 +104,7 @@ const AdminLogin = () => {
               </div>
             )}
 
+            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading || !password}
@@ -108,6 +115,7 @@ const AdminLogin = () => {
           </form>
         </div>
 
+        {/* Back to Home Link */}
         <div className="text-center mt-6">
           <a
             href="/"
