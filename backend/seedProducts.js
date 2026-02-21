@@ -2,7 +2,9 @@ require("dotenv").config({ path: __dirname + "/.env" });
 const mongoose = require("mongoose");
 const Product = require("./models/Product");
 
-mongoose.connect(process.env.MONGO_URI);
+const MONGO_URI = "mongodb+srv://sagarankit2310_db_user:lz4i1SHJHeDo90ZB@12thfailpizza.snwlr42.mongodb.net/?appName=12thfailpizza";
+
+mongoose.connect(MONGO_URI);
 
 const products = [
   // Pizza
@@ -12,6 +14,8 @@ const products = [
     price: 100,
     image: "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?w=400&h=300&fit=crop",
     category: "pizza",
+    rating: 4.5,
+    popular: true,
   },
   {
     name: "Bahubali Mix Veg Pizza",
@@ -19,6 +23,8 @@ const products = [
     price: 130,
     image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop",
     category: "pizza",
+    rating: 4.7,
+    popular: true,
   },
   {
     name: "Jai & Veeru Onion Capsicum Pizza",
@@ -26,6 +32,8 @@ const products = [
     price: 130,
     image: "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=400&h=300&fit=crop",
     category: "pizza",
+    rating: 4.4,
+    popular: false,
   },
   {
     name: "Katappa Spicy Pizza",
@@ -33,6 +41,8 @@ const products = [
     price: 140,
     image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop",
     category: "pizza",
+    rating: 4.6,
+    popular: true,
   },
   {
     name: "Break-up Tandoori Paneer Pizza",
@@ -40,6 +50,8 @@ const products = [
     price: 150,
     image: "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=400&h=300&fit=crop",
     category: "pizza",
+    rating: 4.3,
+    popular: false,
   },
   {
     name: "Badshah Farm House Pizza",
@@ -47,6 +59,8 @@ const products = [
     price: 150,
     image: "https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=400&h=300&fit=crop",
     category: "pizza",
+    rating: 4.8,
+    popular: true,
   },
   {
     name: "Sholey Country Special Pizza",
@@ -54,6 +68,8 @@ const products = [
     price: 150,
     image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop",
     category: "pizza",
+    rating: 4.5,
+    popular: false,
   },
   {
     name: "3 Idiots Double Cheese Margherita",
@@ -61,6 +77,8 @@ const products = [
     price: 150,
     image: "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?w=400&h=300&fit=crop",
     category: "pizza",
+    rating: 4.7,
+    popular: true,
   },
   {
     name: "Dangal Golden Corn Pizza",
@@ -68,6 +86,8 @@ const products = [
     price: 160,
     image: "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=400&h=300&fit=crop",
     category: "pizza",
+    rating: 4.4,
+    popular: false,
   },
   {
     name: "Pathan Cheese Burst Pizza",
@@ -75,6 +95,8 @@ const products = [
     price: 170,
     image: "https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=400&h=300&fit=crop",
     category: "pizza",
+    rating: 4.9,
+    popular: true,
   },
   {
     name: "K.G.F American Veg Pizza",
@@ -82,6 +104,8 @@ const products = [
     price: 190,
     image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop",
     category: "pizza",
+    rating: 4.6,
+    popular: false,
   },
   {
     name: "Rockey Bhai 12th Fail Special Pizza",
@@ -89,6 +113,8 @@ const products = [
     price: 220,
     image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop",
     category: "pizza",
+    rating: 4.9,
+    popular: true,
   },
 
   // Sandwich
@@ -98,6 +124,8 @@ const products = [
     price: 30,
     image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&h=300&fit=crop",
     category: "sandwich",
+    rating: 4.2,
+    popular: false,
   },
   {
     name: "Vivo Company Paneer Sandwich",
@@ -105,6 +133,8 @@ const products = [
     price: 40,
     image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&h=300&fit=crop",
     category: "sandwich",
+    rating: 4.3,
+    popular: false,
   },
   {
     name: "Samsung Company Cheese Sandwich",
@@ -112,6 +142,8 @@ const products = [
     price: 60,
     image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&h=300&fit=crop",
     category: "sandwich",
+    rating: 4.5,
+    popular: true,
   },
   {
     name: "iPhone Company Tandoori Paneer Sandwich",
@@ -119,6 +151,8 @@ const products = [
     price: 75,
     image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&h=300&fit=crop",
     category: "sandwich",
+    rating: 4.6,
+    popular: true,
   },
 
   // Burger
@@ -128,6 +162,8 @@ const products = [
     price: 50,
     image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop",
     category: "burger",
+    rating: 4.3,
+    popular: false,
   },
   {
     name: "Ronaldo Paneer Aloo Tikki Burger",
@@ -135,6 +171,8 @@ const products = [
     price: 60,
     image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop",
     category: "burger",
+    rating: 4.4,
+    popular: false,
   },
   {
     name: "Big Boss Spicy Burger",
@@ -142,6 +180,8 @@ const products = [
     price: 80,
     image: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&h=300&fit=crop",
     category: "burger",
+    rating: 4.6,
+    popular: true,
   },
   {
     name: "Yo Yo Honey Singh Tandoori Paneer Burger",
@@ -149,6 +189,8 @@ const products = [
     price: 90,
     image: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400&h=300&fit=crop",
     category: "burger",
+    rating: 4.7,
+    popular: true,
   },
   {
     name: "Tiktok is Back Maharaja Burger",
@@ -156,6 +198,8 @@ const products = [
     price: 100,
     image: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400&h=300&fit=crop",
     category: "burger",
+    rating: 4.8,
+    popular: true,
   },
 
   // French Fries
@@ -165,6 +209,8 @@ const products = [
     price: 50,
     image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop",
     category: "french-fries",
+    rating: 4.4,
+    popular: true,
   },
   {
     name: "Obama Cheesy French Fries",
@@ -172,6 +218,8 @@ const products = [
     price: 100,
     image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop",
     category: "french-fries",
+    rating: 4.7,
+    popular: true,
   },
 
   // Garlic Bread
@@ -181,6 +229,8 @@ const products = [
     price: 40,
     image: "https://images.unsplash.com/photo-1619535860434-ba1d8fa12536?w=400&h=300&fit=crop",
     category: "garlic-bread",
+    rating: 4.3,
+    popular: false,
   },
   {
     name: "Whatsapp Wala Veg Garlic Bread",
@@ -188,6 +238,8 @@ const products = [
     price: 50,
     image: "https://images.unsplash.com/photo-1619535860434-ba1d8fa12536?w=400&h=300&fit=crop",
     category: "garlic-bread",
+    rating: 4.4,
+    popular: false,
   },
   {
     name: "Instagram Wala Cheesy Paneer Garlic Bread",
@@ -195,6 +247,8 @@ const products = [
     price: 60,
     image: "https://images.unsplash.com/photo-1619535860434-ba1d8fa12536?w=400&h=300&fit=crop",
     category: "garlic-bread",
+    rating: 4.6,
+    popular: true,
   },
 
   // Coffee & Shakes
@@ -204,6 +258,8 @@ const products = [
     price: 60,
     image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop",
     category: "coffee-shakes",
+    rating: 4.5,
+    popular: true,
   },
   {
     name: "Sachin Sir Caramel Cold Coffee",
@@ -211,6 +267,8 @@ const products = [
     price: 90,
     image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop",
     category: "coffee-shakes",
+    rating: 4.7,
+    popular: true,
   },
   {
     name: "Virat Bhai Hazelnut Cold Coffee",
@@ -218,6 +276,8 @@ const products = [
     price: 90,
     image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop",
     category: "coffee-shakes",
+    rating: 4.6,
+    popular: true,
   },
   {
     name: "Salman Bhai Oreo Shake",
@@ -225,6 +285,8 @@ const products = [
     price: 90,
     image: "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=400&h=300&fit=crop",
     category: "coffee-shakes",
+    rating: 4.8,
+    popular: true,
   },
   {
     name: "Shahrukh Bhai KitKat Shake",
@@ -232,6 +294,8 @@ const products = [
     price: 90,
     image: "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=400&h=300&fit=crop",
     category: "coffee-shakes",
+    rating: 4.8,
+    popular: true,
   },
 
   // Unique Dishes
@@ -241,6 +305,8 @@ const products = [
     price: 80,
     image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop",
     category: "unique-dishes",
+    rating: 4.9,
+    popular: true,
   },
   {
     name: "Donald Trump Frenchy Sandwich",
@@ -248,6 +314,8 @@ const products = [
     price: 100,
     image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&h=300&fit=crop",
     category: "unique-dishes",
+    rating: 4.5,
+    popular: false,
   },
   {
     name: "Bill Gates The Sandy Burg",
@@ -255,6 +323,8 @@ const products = [
     price: 120,
     image: "https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=400&h=300&fit=crop",
     category: "unique-dishes",
+    rating: 4.7,
+    popular: true,
   },
 ];
 

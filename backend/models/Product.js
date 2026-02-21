@@ -25,6 +25,16 @@ const productSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+
+  rating: {
+    type: Number,
+    default: 4.5,
+  },
+
+  popular: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("Product", productSchema);
